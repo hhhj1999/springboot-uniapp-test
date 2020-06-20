@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbootuniapptest.mapper.OrderMapper">
+
+    <insert id="insertOne" parameterType="com.example.springbootuniapptest.bean.Order" useGeneratedKeys="true">
+        insert into orderInfo(openid,goodsname,countt,singleprice,price,address,state,dayy,imageurl,paystate) values(#{openid},#{goodsname},#{countt},#{singleprice},#{price},#{address},#{state},#{dayy},#{imageurl},#{paystate})
+    </insert>
+
+<!--  根据id删除数据  -->
+    <delete id="deleteOne" >
+        delete from orderInfo where id = #{id}
+    </delete>
+
+<!--  根据openid查询订单  -->
+    <select id="findByOpenid" resultType="com.example.springbootuniapptest.bean.Order">
+        select * from orderInfo where openid=#{openid}
+    </select>
+
+<!--    根据订单号和关键字修改订单状态-->
+    <update id="modifyByIdAndKey">
+        update orderInfo set state = #{key} where id = #{id}
+    </update>
+
+    <!--    根据订单号和关键字修改订单状态-->
+    <update id="modifyGoodsByIdAndCount">
+        update goods set salecount=salecount+#{count},store=store-#{count} where id=#{id}
+    </update>
+
+    <!--    根据订单号和关键字修改订单状态-->
+    <update id="changePayStateById">
+        update orderInfo set paystate =#{key} where id = #{id}
+    </update>
+
+
+</mapper>

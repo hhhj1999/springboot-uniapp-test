@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbootuniapptest.mapper.AdminTestMapper">
+
+
+    <!--广告专栏-->
+    <select id="getAll" resultType="com.example.springbootuniapptest.bean.admin" parameterType="java.util.Map">
+        SELECT * FROM admin
+    </select>
+
+<!--    删除-->
+    <delete id="delById" parameterType="java.lang.Integer">
+        delete from admin where id = #{id}
+    </delete>
+
+<!--    添加-->
+<!--    $不可以防止注入-->
+    <insert id="saveAdmin" parameterType="com.example.springbootuniapptest.bean.admin">
+        insert into admin(username,password) values(#{username},#{password})
+    </insert>
+
+</mapper>

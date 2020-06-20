@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springbootuniapptest.mapper.GoodsMapper">
+    <!--    public Employee getEmpById(Integer id);
+
+     public void insertEmp(Employee employee);-->
+    <select id="getGoodsAll" resultType="com.example.springbootuniapptest.bean.Goods">
+        SELECT * FROM goods
+    </select>
+
+<!-- 推荐商品   -->
+    <select id="getGoodsPrefer" resultType="com.example.springbootuniapptest.bean.Goods">
+        SELECT * FROM goods ORDER BY salecount DESC LIMIT 3
+    </select>
+
+<!-- 按销量排序的商品   -->
+    <select id="getGoodsAllBySalecount" resultType="com.example.springbootuniapptest.bean.Goods">
+        SELECT * FROM goods ORDER BY salecount DESC
+    </select>
+
+    <!-- 按价格排序的商品   -->
+    <select id="getGoodsAllByPriceDESC" resultType="com.example.springbootuniapptest.bean.Goods">
+        SELECT * FROM goods ORDER BY price DESC
+    </select>
+
+    <!-- 按价格排序的商品   -->
+    <select id="getGoodsAllByPriceASC" resultType="com.example.springbootuniapptest.bean.Goods">
+        SELECT * FROM goods ORDER BY price ASC
+    </select>
+
+    <!-- 按价格区间排序的商品   -->
+    <select id="getGoodsByPrice" resultType="com.example.springbootuniapptest.bean.Goods">
+        SELECT * FROM goods where price between #{low} and #{high} ORDER BY price
+    </select>
+
+    <!-- 按年份区间排序的商品   -->
+    <select id="getGoodsByYear" resultType="com.example.springbootuniapptest.bean.Goods">
+        SELECT * FROM goods where years between 2020-#{low} and 2020-#{high} ORDER BY years
+    </select>
+
+    <!-- 按模糊搜索的商品   -->
+    <select id="getGoodsByName" parameterType="string" resultType="com.example.springbootuniapptest.bean.Goods">
+        SELECT * FROM goods where calling like concat('%',#{key},'%')
+    </select>
+
+    <insert id="insertUser" >
+        INSERT INTO user(openid) select #{openid} where not exists(select * from user where openid  = #{openid})
+    </insert>
+
+</mapper>
